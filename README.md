@@ -57,7 +57,20 @@
     }
     ```
 
-2. **Avatar Image**: Place an image named `avatar.jpg` or `avatar.png` in the same directory as `curriculum.json` to include your picture in the generated CV.
+2. **Avatar Image**:
+    - Place an image named `avatar.jpg`, `avatar.jpeg`, or `avatar.png` in the same directory as `curriculum.json`.
+    - This image will be included in the generated CV. Ensure that the file name matches exactly with the name specified in the `curriculum.json`.
+
+3. **Company Information**:
+    - **Logo**: The company logo is mandatory. The filename of the logo image is crucial because it is used to parse the company's name from the file name. For example, a file named `Accenture.png` will be associated with the company name "Accenture".
+    - **Email**: The email address is required as it serves as the target recipient for the application email. 
+    - **Position**: The position you're applying for is mandatory. It is used both in the body of the email and in the email subject line to tailor the message to the specific job opening.
+
+### CV Generation Process
+
+Every time the CV Generator runs, it will create both:
+- A **customized CV for each company** listed in `curriculum.json`, which includes a custom watermark.
+- A **default CV without a custom watermark** to be used as a general-purpose resume.
 
 ### Setup Google Cloud Console for Gmail API
 
@@ -90,4 +103,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any inquiries or issues, please contact [Your Name](mailto:your.email@example.com).
+For any inquiries or issues, please contact [JoaoWorkspace](mailto:joao.workspace@gmail.com).
