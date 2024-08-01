@@ -1,7 +1,6 @@
 # JobFinder
 
-**JobFinder** is a Python application designed to streamline the process of generating tailored CVs and sending personalized emails to potential employers. It utilizes the Gmail API for sending emails and allows users to configure their application using a `curriculum.json` file.
-
+**JobFinder** is a sophisticated Python application designed to streamline the creation of tailored CVs and the dispatch of personalized emails to potential employers. Utilizing the Gmail API for email delivery, JobFinder allows users to configure their application via a `curriculum.json` file, ensuring a highly customizable and efficient job application process.
 ## Features
 
 - **Customized CV Generation**: Create CV PDFs from a JSON template tailored for different job applications.
@@ -36,13 +35,13 @@
         },
         "companies": [
             {
-                "logo": "Accenture.png",
+                "logo": "GitHub.png",
                 "email": "example@example.com",
-                "position": "Software Engineer"
+                "position": "Software Architect"
             }
         ],
         "avatar": "avatar.jpg",
-        "name": "Your Name",
+        "name": "John Doe",
         "title": "Your Title",
         "about": [
             "Brief description about yourself."
@@ -58,8 +57,14 @@
     ```
 
 2. **Avatar Image**:
-    - Place an image named `avatar.jpg`, `avatar.jpeg`, or `avatar.png` in the same directory as `curriculum.json`.
-    - This image will be included in the generated CV. Ensure that the file name matches exactly with the name specified in the `curriculum.json`.
+    - The avatar image can be named anything and placed in any directory, as long as the correct path is specified in `curriculum.json`.
+    - **Supported Formats**: When using the Image class in ReportLab's `reportlab.platypus` module, the following image formats are supported:
+        - **JPEG/JPG**: Ideal for photographic images.
+        - **PNG**: Supports transparency and is lossless.
+        - **GIF**: Primarily for simple graphics and animations.
+        - **BMP**: Generally uncompressed.
+        - **TIFF/TIF**: Often used for high-quality images.
+        - **PICT**: Macintosh Picture format, though less common.
 
 3. **Company Information**:
     - **Logo**: The company logo is mandatory. The filename of the logo image is crucial because it is used to parse the company's name from the file name. For example, a file named `Accenture.png` will be associated with the company name "Accenture".
@@ -100,7 +105,51 @@
         - [1] **Generate CVs**
         - [2] **Generate emails**
         - [3] **Generate both CVs and emails in sequence**
+     
+### I/O Behavior and Error Handling
 
+When running the application, you may encounter specific behaviors and error messages. Here is an example output of a successful e-mail process run:
+
+```plaintext
+<- MAIN -> Analyzing your 'curriculum.json' data...
+<- MAIN -> Data is valid.
+<- MAIN -> Welcome to JobFinder John Doe! Type the corresponding number in order to select an option.
+<- MAIN -> How may I assist you?
+        [1] Generate Curriculum Vitae PDF Documents
+        [2] Send Curriculum Vitae email to all target companies
+        [3] All of the above
+Your choice: 2
+<- MAIN -> Sending emails...
+<- EMAIL GENERATOR -> ERROR: Interval Minimum of 0 minutes is lower than 30 minutes!
+<- EMAIL GENERATOR -> Applying default values instead...
+<- EMAIL GENERATOR -> ERROR: Interval Maximum of 0 minutes is lower than 30 minutes!
+<- EMAIL GENERATOR -> Applying default values instead...
+<- EMAIL GENERATOR -> Interval set to 30 - 60 minutes
+<- EMAIL GENERATOR -> Do you wish to use your.email@gmail.com as your sender email?
+        [1] Yes
+        [2] No
+Your choice: 1
+<- EMAIL GENERATOR -> GMail detected. Attempting to authenticate and send emails through GMail API...
+<- EMAIL GENERATOR -> Successfully authenticated GMail! Sending...
+<- EMAIL GENERATOR -> Company: GitHub, Position: Software Architect, BaseCV: output\curriculum_GitHub.pdf
+<- EMAIL GENERATOR -> Most recent company CV found: output\curriculum_curriculum_GitHub_04537dcefa814746aeda65497e17614e.pdf
+<- EMAIL GENERATOR -> Email body:
+    <html>
+    <body>
+        <p>Greetings GitHub Team,</p>
+        <p>Noticed you have a vacancy for Software Architect.<br><b>DISCLAIMER:</b> I am available to work after 17pm[UTC] and before 9am[UTC] exclusively at the moment.</p>
+        <p>My background has prepared me well to contribute to GitHub.</p>
+        <p>I left my CV in attachment for your review. I look forward to the opportunity to discuss my qualifications further.</p><p>Best regards,<br>John Doe</p>
+    </body>
+    </html>
+
+<- EMAIL GENERATOR -> Email sent to example@example.com
+<- EMAIL GENERATOR -> Waiting 46 minutes before sending the next email.
+
+<- FINISHED -> Process interrupted by the user. Exiting...
+Press any key to continue . . .
+```
+*Note: I interrupt the process with Ctrl+C after the first e-mail is sent in the example.* 
 ## License
 
 This project is licensed under the GNU General Public License - see the [LICENSE](LICENSE) file for details.
