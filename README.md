@@ -68,9 +68,13 @@
 
 ### CV Generation Process
 
-Every time the CV Generator runs, it will create both:
-- A **customized CV for each company** listed in `curriculum.json`, which includes a custom watermark.
-- A **default CV without a custom watermark** to be used as a general-purpose resume.
+- **Multiple Versions**: Each time the CV Generator runs, it will create both a customized CV for each company listed in `curriculum.json` and a default CV without a custom watermark. Existing files are not overwritten; instead, a GUID is suffixed to the filename, allowing multiple versions of your CV to coexist.
+- **File Naming**: Generated CVs will have filenames in the format `curriculum_companyName_GUID.pdf`.
+
+### Email Sending Process
+
+- **Latest Files**: When sending emails, the code will select the latest files generated for each company.
+- **Email Attachments**: Despite the filename being `curriculum_companyName_GUID.pdf`, the attachment will be sent as `curriculum_companyName.pdf` in the email for professionalism.
 
 ### Setup Google Cloud Console for Gmail API
 
@@ -90,16 +94,16 @@ Every time the CV Generator runs, it will create both:
 
 ### Running the Application
 
-1. **Execute JobFinder**:
+- **Execute JobFinder**:
     - Run the application by executing `JobFinder.exe`.
     - Choose the desired option:
-        1. Generate CVs
-        2. Generate emails
-        3. Generate both CVs and emails in sequence
+        - [1] **Generate CVs**
+        - [2] **Generate emails**
+        - [3] **Generate both CVs and emails in sequence**
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU General Public License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
