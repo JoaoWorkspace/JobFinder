@@ -120,7 +120,7 @@
 
 **Pro Tip**: *Guiding yourself with the sampled `curriculum.json` will facilitate.*
 
-## Template Customization
+### Template Customization
 
 1. **Create a Custom Template:** Define a `generate_pdf_from_json` function in your custom template.
 2. **Update the Import:** Change the import statement in `GenerateCV.py` to use your custom template:
@@ -163,8 +163,9 @@
     - Download the `credentials.json` file from the [Google Cloud Console](https://console.cloud.google.com/).
     - Place the `credentials.json` file in the same directory as the executable (e.g., `JobFinder.exe`). This ensures the application can access the necessary credentials for authentication with the Gmail API.
 
-### Running the Application
-
+## Running the Application
+- **Execute MakeExecutable.ps1**:
+    - Create the executable inside **JobFinder** folder by running `MakeExecutable.ps1` inside *src*.
 - **Execute JobFinder**:
     - Run the application by executing `JobFinder.exe`.
     - Choose the desired option:
