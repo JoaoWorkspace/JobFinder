@@ -1,12 +1,15 @@
-# JobFinder
+
+
+# JobFinder <img src="https://github.com/user-attachments/assets/c7f2cf41-a7f9-40e2-a975-b311c0d160c3" width="100" height="100">
 
 **JobFinder** is a sophisticated Python application designed to streamline the creation of tailored CVs and the dispatch of personalized emails to potential employers. Utilizing the Gmail API for email delivery, JobFinder allows users to configure their application via a `curriculum.json` file, ensuring a highly customizable and efficient job application process.
 ## Features
 
-- **Customized CV Generation**: Create CV PDFs from a JSON template tailored for different job applications.
-- **Personalized Email Sending**: Send emails to companies with customizable intervals and dynamic content.
-- **Email Logging**: Log sent emails in a specified sub-folder with timestamped filenames.
-- **Dynamic Content Support**: Use placeholders in emails for company-specific details to personalize each message.
+- **Customized CV Generation**: Automatically create CV PDFs from a JSON template tailored for different job applications.
+- **Personalized Email Dispatch**: Send customized emails to potential employers with configurable intervals and dynamic content.
+- **Email Logging**: Maintain a log of sent emails in a specified sub-folder with timestamped filenames.
+- **Dynamic Content Support**: Use placeholders in emails to personalize each message for specific companies.
+- **Modular Template System**: Easily create and use custom templates for CV generation by defining a `generate_pdf_from_json` function.
 
 ## Usage
 
@@ -70,6 +73,40 @@
     - **Logo**: The company logo is mandatory. The filename of the logo image is crucial because it is used to parse the company's name from the file name. For example, a file named `Accenture.png` will be associated with the company name "Accenture".
     - **Email**: The email address is required as it serves as the target recipient for the application email. 
     - **Position**: The position you're applying for is mandatory. It is used both in the body of the email and in the email subject line to tailor the message to the specific job opening.
+
+### Template Customization
+
+1. **Create a Custom Template:** Define a `generate_pdf_from_json` function in your custom template.
+2. **Update the Import:** Change the import statement in `GenerateCV.py` to use your custom template:
+```python
+import templates.base as template  # Original import
+import templates.my_custom as template  # Custom template import
+```
+3. **Sample customized GenerateCV:**
+```python
+import os
+import json
+import templates.my_custom as template
+
+def generate_cv_for_companies(data='curriculum.json', pdf_folder='output'):
+    if data == 'curriculum.json':
+        with open(data, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+
+    image_extensions = ('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.tif', '.pict')
+
+    companies = data.get('companies', '')
+    if companies:
+        for company in companies:
+            company_logo = company['logo']
+            company_logo_path = f"logos/{company_logo}"
+            company_name, ext = os.path.splitext(company_logo)
+            if os.path.exists(company_logo_path) and ext.lower() in image_extensions:
+                output_path = os.path.join(pdf_folder, f"curriculum_{company_name}.pdf")
+                template.generate_pdf_from_json(output_path, data, company_logo_path)
+
+    template.generate_pdf_from_json('output/curriculum.pdf', data)
+```
 
 ### CV Generation Process
 
