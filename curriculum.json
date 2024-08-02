@@ -1,0 +1,161 @@
+{
+    "minimumInterval": 30,
+    "maximumInterval": 45,
+    "message": {
+        "opening": [
+            "<p>Greetings {company} Team,</p>"
+        ],
+        "constant": [
+            "<p>Noticed you have a vacancy for {position}.<br><b>DISCLAIMER:</b> I am available to work after 17pm[UTC] and before 9am[UTC] exclusively at the moment.</p>"
+        ],
+        "variable": [
+            "<p>I believe my skills and experiences align well with {company}’s needs, and I am eager to contribute to your team.</p>"
+        ],
+        "ending": [
+            "<p>I left my CV in attachment for your review. I look forward to the opportunity to discuss my qualifications further.</p>",
+            "<p>Best regards,<br>{name}</p>"
+        ]
+    },
+    "companies": [
+        {
+            "logo": "GitHub.png",
+            "email": "example@example.com",
+            "position": "Software Architect"
+        }
+    ],
+    "avatar": "avatar.jpg",
+    "name": "John Doe",
+    "title": "Your Title",
+    "about": [
+        "Brief description about yourself."
+    ],
+    "contact": {
+        "address": "Your Address",
+        "phone": "Your Phone Number",
+        "email": "your.email@gmail.com",
+        "linkedin": "https://linkedin.com/in/yourprofile",
+        "github": "https://github.com/yourprofile"
+    },
+	"experience": [
+		{
+			"title": "Senior Software Engineer",
+			"team": "Technology Solutions",
+			"company": "InnovateTech Solutions",
+			"date": "2022 - Present",
+			"sectors": ["Enterprise Software"],
+			"technologies": [
+				"Java",
+				"Spring Framework",
+				"Microservices Architecture",
+				"Kafka",
+				"Elasticsearch",
+				"Docker",
+				"Kubernetes",
+				"Git",
+				"CI/CD Pipelines"
+			]
+		},
+		{
+			"title": "Software Developer",
+			"team": "Product Development",
+			"company": "Digital Solutions Ltd.",
+			"date": "2018 - 2022",
+			"sectors": ["E-commerce", "Digital Media"],
+			"technologies": [
+				"Python",
+				"Django",
+				"React.js",
+				"Node.js",
+				"GraphQL",
+				"PostgreSQL",
+				"Redis",
+				"AWS Services",
+				"Terraform",
+				"Jenkins",
+				"Agile Methodologies"
+			]
+		},
+		{
+			"title": "Junior Developer",
+			"team": "Software Engineering",
+			"company": "TechStart Innovations",
+			"date": "2016 - 2018",
+			"sectors": ["Education Technology"],
+			"technologies": [
+				"C#",
+				".NET Framework",
+				"SQL Server",
+				"Angular",
+				"RESTful APIs",
+				"Unit Testing",
+				"Version Control (SVN/Git)"
+			]
+		}
+	],
+	"education": [
+		{
+			"degree": "BsC in Computer Science",
+			"institution": "Tech University",
+			"date": "2016"
+		}
+	],
+	"certificates": [
+		{
+			"name": "AWS Certified Solutions Architect - Associate",
+			"authority": "Amazon Web Services",
+			"date": "2023"
+		},
+		{
+			"name": "Certified Scrum Master",
+			"authority": "Scrum Alliance",
+			"date": "2021"
+		}
+	],
+	"projects": [
+		{
+			"title": "Real-time Analytics Platform",
+			"description": "Designed and implemented a scalable real-time analytics platform using Kafka and Elasticsearch to process streaming data."
+		},
+		{
+			"title": "E-commerce Application Upgrade",
+			"description": [
+				"Led the upgrade of a legacy e-commerce application to a modern microservices architecture using Python, Django, and React.js.",
+				"Migrated client data from SQL Server to RavenDB."
+			]
+		}
+	],
+	"skills": {
+		"Technical": {
+			"Programming Languages": 5,
+			"Web Development": 5,
+			"Microservices Architecture": 4,
+			"Cloud Technologies": 4,
+			"DevOps and CI/CD": 4,
+			"Database Management": 4,
+			"Version Control Systems": 5,
+			"Agile Methodologies": 4,
+			"Software Design Patterns": 4
+		},
+		"Leadership and Management": {
+			"Team Leadership": 3,
+			"Project Management": 3,
+			"Communication Skills": 4,
+			"Problem Solving and Decision Making": 5,
+			"Change Management": 3
+		},
+		"Soft": {
+			"Time Management": 5,
+			"Adaptability and Learning Agility": 5,
+			"Team Collaboration": 5,
+			"Conflict Resolution": 4
+		}
+	},
+	"languages": {
+		"Portuguese": 5,
+		"English": 5,
+		"Spanish": 3,
+		"German": 2,
+		"French": 2,
+		"Chinese": 1
+	}
+}
