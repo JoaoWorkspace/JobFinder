@@ -1,15 +1,20 @@
 
 
-# JobFinder <img src="https://github.com/user-attachments/assets/c7f2cf41-a7f9-40e2-a975-b311c0d160c3" width="100" height="100">
+# JobFinder <img src="https://github.com/user-attachments/assets/c7f2cf41-a7f9-40e2-a975-b311c0d160c3" width="100">
 
 **JobFinder** is a sophisticated Python application designed to streamline the creation of tailored CVs and the dispatch of personalized emails to potential employers. Utilizing the Gmail API for email delivery, JobFinder allows users to configure their application via a `curriculum.json` file, ensuring a highly customizable and efficient job application process.
+<img src="https://github.com/user-attachments/assets/f3b67c42-90f0-4446-afa5-e88e8f98491d" width = 800>
+
+*Sample obtained with `curriculum.json` provided*
 ## Features
 
 - **Customized CV Generation**: Automatically create CV PDFs from a JSON template tailored for different job applications.
+- **File Management**: CV generation will not overwrite existing files. Instead, it will append a GUID to the filenames to preserve multiple versions.
 - **Personalized Email Dispatch**: Send customized emails to potential employers with configurable intervals and dynamic content.
 - **Email Logging**: Maintain a log of sent emails in a specified sub-folder with timestamped filenames.
 - **Dynamic Content Support**: Use placeholders in emails to personalize each message for specific companies.
 - **Modular Template System**: Easily create and use custom templates for CV generation by defining a `generate_pdf_from_json` function.
+- **Schema Validation**: Validate `curriculum.json` using a predefined schema to ensure data integrity and consistency.
 
 ## Usage
 
@@ -70,7 +75,7 @@
         - **PICT**: Macintosh Picture format, though less common.
 
 3. **Company Information**:
-    - **Logo**: The company logo is mandatory. The filename of the logo image is crucial because it is used to parse the company's name from the file name. For example, a file named `Accenture.png` will be associated with the company name "Accenture".
+    - **Logo**: The company logo is mandatory. It must be placed in the `logos` sub-folder of your executable. The filename of the logo image is used to parse the company's name (e.g., `Accenture.png` will be associated with the company name "Accenture").
     - **Email**: The email address is required as it serves as the target recipient for the application email. 
     - **Position**: The position you're applying for is mandatory. It is used both in the body of the email and in the email subject line to tailor the message to the specific job opening.
 
@@ -144,9 +149,7 @@ def generate_cv_for_companies(data='curriculum.json', pdf_folder='output'):
         - [3] **Generate both CVs and emails in sequence**
      
 ### I/O Behavior and Error Handling
-
 When running the application, you may encounter specific behaviors and error messages. Here is an example output of a successful e-mail process run:
-
 ```plaintext
 <- MAIN -> Analyzing your 'curriculum.json' data...
 <- MAIN -> Data is valid.
