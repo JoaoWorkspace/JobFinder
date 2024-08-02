@@ -5,7 +5,7 @@
 **JobFinder** is a sophisticated Python application designed to streamline the creation of tailored CVs and the dispatch of personalized emails to potential employers. Utilizing the Gmail API for email delivery, JobFinder allows users to configure their application via a `curriculum.json` file, ensuring a highly customizable and efficient job application process.
 <img src="https://github.com/user-attachments/assets/f3b67c42-90f0-4446-afa5-e88e8f98491d" width = 800>
 
-*Sample obtained with `curriculum.json` provided*
+*Sample obtained with `curriculum.json` provided and the base template*
 ## Features
 
 - **Customized CV Generation**: Automatically create CV PDFs from a JSON template tailored for different job applications.
@@ -79,49 +79,67 @@
     - **Email**: The email address is required as it serves as the target recipient for the application email. 
     - **Position**: The position you're applying for is mandatory. It is used both in the body of the email and in the email subject line to tailor the message to the specific job opening.
 
-### Template Customization
+4. **Introductory Information**:
+   - All three of these are required in order to function: [Name, Title, About]
+     
+5. **Contact Information**: 
+    - **Address**: Your address.
+    - **Phone**: Your phone number.
+    - **Email**: Your email address.
+    - **Linkedin**: LinkedIn profile URL.
+    - **Github**: GitHub profile URL.
+   
+6. **Experience Information**: Array of experience objects
+    - **Title**: Job title.
+    - **Team**: Team name.
+    - **Company**: Company name.
+    - **Date**: Employment date.
+    - **Sectors**: Array of sectors worked in.
+    - **Technologies**: Array of technologies used.
+
+7. **Education**: Array of education objects
+    - **Degree**: Degree name.
+    - **Institution**: Institution name.
+    - **Date**: Graduation date.
+
+8. **Certificates**: Array of certificate objects
+    - **Name**: Certificate name.
+    - **Authority**: Issuing authority.
+    - **Date**: Certification date.
+
+9. **Projects**: Array of project objects
+    - **Title**: Project title.
+    - **Description**: Array of strings or a single string describing the project.
+
+10. **Skills**: Object containing skill ratings:
+    - **Technical**: Sub-object with various technical skills.
+    - **Leadership and Management**: Sub-object with leadership and management skills.
+    - **Soft**: Sub-object with soft skills.
+
+11. **Languages**: Object with language proficiency levels.
+
+**Pro Tip**: *Guiding yourself with the sampled `curriculum.json` will facilitate.*
+
+## Template Customization
 
 1. **Create a Custom Template:** Define a `generate_pdf_from_json` function in your custom template.
 2. **Update the Import:** Change the import statement in `GenerateCV.py` to use your custom template:
-```python
-import templates.base as template  # Original import
-import templates.my_custom as template  # Custom template import
-```
-3. **Sample customized GenerateCV:**
-```python
-import os
-import json
-import templates.my_custom as template
-
-def generate_cv_for_companies(data='curriculum.json', pdf_folder='output'):
-    if data == 'curriculum.json':
-        with open(data, 'r', encoding='utf-8') as file:
-            data = json.load(file)
-
-    image_extensions = ('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.tif', '.pict')
-
-    companies = data.get('companies', '')
-    if companies:
-        for company in companies:
-            company_logo = company['logo']
-            company_logo_path = f"logos/{company_logo}"
-            company_name, ext = os.path.splitext(company_logo)
-            if os.path.exists(company_logo_path) and ext.lower() in image_extensions:
-                output_path = os.path.join(pdf_folder, f"curriculum_{company_name}.pdf")
-                template.generate_pdf_from_json(output_path, data, company_logo_path)
-
-    template.generate_pdf_from_json('output/curriculum.pdf', data)
-```
+    ```python
+    import templates.Base as template  # Original import
+    import templates.MyCustom as template  # Custom template import
+    ```
+3. **Run `MakeExecutable.ps1`:** It will automatically recompile your python scripts and remake `JobFinder.exe`.
 
 ### CV Generation Process
 
+- **Multiple Versions**: Every time the CV Generator runs, it creates both a tailored CV for each company listed in curriculum.json and a default CV without a custom watermark. Files are saved with a GUID suffix to prevent overwriting existing files, allowing multiple versions to coexist.
 - **Multiple Versions**: Each time the CV Generator runs, it will create both a customized CV for each company listed in `curriculum.json` and a default CV without a custom watermark. Existing files are not overwritten; instead, a GUID is suffixed to the filename, allowing multiple versions of your CV to coexist.
 - **File Naming**: Generated CVs will have filenames in the format `curriculum_companyName_GUID.pdf`.
 
 ### Email Sending Process
 
 - **Latest Files**: When sending emails, the code will select the latest files generated for each company.
-- **Email Attachments**: Despite the filename being `curriculum_companyName_GUID.pdf`, the attachment will be sent as `curriculum_companyName.pdf` in the email for professionalism.
+- **Email Attachments**: When sending emails, the most recent CV files are used. Although the filenames may include a GUID (e.g., `curriculum_companyName_GUID.pdf`), the attachment in the email is named without the GUID (e.g., `curriculum_companyName.pdf`).
 
 ### Setup Google Cloud Console for Gmail API
 
@@ -137,7 +155,13 @@ def generate_cv_for_companies(data='curriculum.json', pdf_folder='output'):
 3. **Create Credentials**:
     - Go to "Credentials" and click "Create Credentials".
     - Select "OAuth 2.0 Client IDs" and configure the consent screen.
-    - Download the `credentials.json` file and place it in the project directory.
+  
+4. **Set the OAuth Scope**:
+    - When configuring OAuth consent, ensure that the scope `/auth/gmail.modify` is included. This scope allows the application to read and modify Gmail messages and labels, which is necessary for sending and managing emails.
+
+5. **Download and Place `credentials.json`**:
+    - Download the `credentials.json` file from the [Google Cloud Console](https://console.cloud.google.com/).
+    - Place the `credentials.json` file in the same directory as the executable (e.g., `JobFinder.exe`). This ensures the application can access the necessary credentials for authentication with the Gmail API.
 
 ### Running the Application
 
